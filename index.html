@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Zanimljiva Geografija</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="naslov">
+            <h1>Zanimljiva Geografija</h1>
+        </div>
+        
+        <div>
+        <form id="formUsername">
+
+            <label>Korisničko ime: </label>
+            <input type="text" name="username" id="inputUsername" placeholder="Unesite korisničko ime">
+            <input type="submit" value="Submit" id="btnUsername">
+
+        </form>
+        </div>
+
+        <div id="hide">
+            <form id="predlog">
+
+                <label>Predložite novi pojam: </label>
+                <select name="birajKategoriju" id="birajKategoriju">
+                    <option value="Država">Država</option>
+                    <option value="Grad">Grad</option>
+                    <option value="Reka">Reka</option>
+                    <option value="Planina">Planina</option>
+                    <option value="Životinja">Životinja</option>
+                    <option value="Biljka">Biljka</option>
+                    <option value="Predmet">Predmet</option>
+                </select>
+
+                <input type="text" name="noviPojam" id="noviPojam" >
+                <input type="submit" value="Submit" id="submitPojam">
+            </form>
+        </div>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyBhKleFIeMhDjGGXB1USktIC2JUY2LLWsw",
+        authDomain: "zgeog-d5aee.firebaseapp.com",
+        databaseURL: "https://zgeog-d5aee.firebaseio.com",
+        projectId: "zgeog-d5aee",
+        storageBucket: "zgeog-d5aee.appspot.com",
+        messagingSenderId: "841042295789",
+        appId: "1:841042295789:web:2629376a7d85c937e385e4",
+        measurementId: "G-SKEQLYQEWE"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    let db = firebase.firestore();
+    </script>
+        
+        <script src="username.js"></script>
+        <script src="dodajPojam.js"></script>
+        <script src="script.js" type="module"></script>
+    </body>
+</html>

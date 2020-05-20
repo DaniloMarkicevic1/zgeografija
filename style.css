@@ -1,0 +1,8 @@
+.hidden {
+    display: none;
+}
+
+#naslov {
+    text-align: center;
+    color: #4cacbd;
+}

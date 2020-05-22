@@ -50,31 +50,28 @@ db.collection('pojmovi')
 .get()
 .then(snapshot => {
     let arr = [];
-    let counter = 0;
-    let name = []
     let altarr = [];
-    
+    let counter = 0;
     snapshot.docs.forEach((doc, i) => {
  
             arr.push(doc.data().korisnik);
 
     });
     console.log(sortByFrequencyAndRemoveDuplicates(arr));
-    // console.log(arr);
-    // for (let i = arr.length; i >= 0 ; i--) {
-    //     counter++
-    //     if(arr[i] != arr[i-1]) {
-    //         if(name[4]) {
-    //             break;
-    //         }
-    //         else {
-    //             altarr.push(counter);
-    //             name.push([counter,arr[i]]);
-    //             counter = 0;}
-    //     }
-    // }
-    
-    // console.log(name);
+    for (let i = arr.length; i >= 0 ; i--) {
+        counter++
+        if(arr[i] != arr[i-1]) {
+            if(altarr.length == 5) {
+                break;
+            }
+            else {
+                altarr.push(counter);
+                // name.push([counter,arr[i]]);
+                counter = 0;}
+        }
+    }
+    altarr.sort((a, b) => b - a);
+    console.log(altarr);
 })
 .catch(error => {
     console.log('Error', error);

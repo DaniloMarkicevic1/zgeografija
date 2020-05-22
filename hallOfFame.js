@@ -1,6 +1,5 @@
 export function sortByFrequencyAndRemoveDuplicates(array) {
     var frequency = {}, value;
-
     // compute frequencies of each value
     for(var i = 0; i < array.length; i++) {
         value = array[i];
@@ -11,17 +10,19 @@ export function sortByFrequencyAndRemoveDuplicates(array) {
             frequency[value] = 1;
         }
     }
-
     // make array from the frequency object to de-duplicate
     var uniques = [];
     for(value in frequency) {
-        uniques.push(value);
+        if(uniques.length == 5) {
+            break;
+        }
+        else {
+            uniques.push(value);
+        }
     }
-
     // sort the uniques array in descending order by frequency
     function compareFrequency(a, b) {
         return frequency[b] - frequency[a];
     }
-
     return uniques.sort(compareFrequency);
 }

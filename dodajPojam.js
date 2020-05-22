@@ -1,62 +1,81 @@
+import { Dodajpojam } from "./dodajPojamKlasa.js";
+import { Korisnik } from "./korisnik.js";
+import { sortByFrequencyAndRemoveDuplicates } from "./hallOfFame.js"
+//-------------------------------------------------
 let formPredlog = document.querySelector('#predlog');
 let birajKategoriju = document.querySelector('#birajKategoriju');
 let inputNoviPojam = document.querySelector('#noviPojam');
+//-------------------------------------------------
+let formUsername = document.querySelector('#formUsername');
+let inputUsername = document.querySelector('#inputUsername');
+let btnUsername = document.querySelector('#btnUsername');
+//-------------------------------------------------
 
+formUsername.addEventListener('submit', () => {
+
+    let korisnik = new Korisnik(`${inputUsername.value}`);
+    localStorage.setItem('usernameLS', korisnik.korisnik);
+
+})
+//-------------------------------------------------
+console.log()
 formPredlog.addEventListener('submit', e => {
-    let bool = false;
-
     e.preventDefault();
-    console.log(birajKategoriju.value);
 
-    let regEx = /[!@#$%^&*(),.?":{}|<>0-9_\s]/g;
+    let k = `${birajKategoriju.value}`;
+    let ko = localStorage.usernameLS;
+    let p = `${inputNoviPojam.value}`;
+    let ps = p[0].toUpperCase();
+    let noviPojam = new Dodajpojam(k, ko, p, ps);
 
-    let str = inputNoviPojam.value; 
-    str = str.replace(regEx, '');
-    str = str.toLowerCase();
-    let pomStr = str.slice(1,str.length);
-    str = str[0].toUpperCase() + pomStr;
-
-    let date = new Date();
-
-    console.log(str);
-
-    db.collection("pojmovi")
-    .where('kategorija', '==', `${birajKategoriju.value}`)
-    .where('pocetnoSlovo', '==', `${str[0]}`)
-    .get()
-    .then(snapshot => {
-        snapshot.docs.forEach(doc => {
-            if(str == doc.data().pojam) {
-                bool = true;
-                console.log('Postoji');
+    if(localStorage.usernameLS == '') {
+        alert('Niste uneli korisnicko ime')
+    }
+    else {
+        noviPojam.proveriPojam(bool => {
+            if(bool) {
+                alert('Pojam postoji');
+            }
+            else {
+                noviPojam.dodajPojam();
+                console.log('Pojam dodat uspesno')
             }
         });
-
-        if(bool) {
-            alert('Pojam postoji')
-        }
-        else {
-            db.collection('pojmovi').doc().set({
-                kategorija: `${birajKategoriju.value}`,
-                pojam: `${str}`,
-                pocetnoSlovo: `${str[0]}`,
-                korisnik: localStorage.usernameLS,
-                vreme: firebase.firestore.Timestamp.fromDate(date)
-            })
-            .then(function() {
-                console.log('Pojam uspesno dodat');
-            })
-            .catch(function(error) {
-                console.error("Greska pri dodavanju ", error);
-            });
-        }
-    
-    })
-    .catch(error => {
-        console.error('Greska', error);
-    });
-
+    }
     formPredlog.reset();
 });
+//-------------------------------------------------
+db.collection('pojmovi')
+.orderBy('korisnik')
+.get()
+.then(snapshot => {
+    let arr = [];
+    let counter = 0;
+    let name = []
+    let altarr = [];
+    
+    snapshot.docs.forEach((doc, i) => {
+ 
+            arr.push(doc.data().korisnik);
 
-
+    });
+    console.log(sortByFrequencyAndRemoveDuplicates(arr));
+    // console.log(arr);
+    // for (let i = arr.length; i >= 0 ; i--) {
+    //     counter++
+    //     if(arr[i] != arr[i-1]) {
+    //         if(name[4]) {
+    //             break;
+    //         }
+    //         else {
+    //             altarr.push(counter);
+    //             name.push([counter,arr[i]]);
+    //             counter = 0;}
+    //     }
+    // }
+    
+    // console.log(name);
+})
+.catch(error => {
+    console.log('Error', error);
+});

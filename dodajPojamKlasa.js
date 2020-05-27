@@ -61,42 +61,26 @@ export class Dodajpojam {
         return response;
     }
     // Provera pojma
+
     proveriPojam(callback) {
         let bool = false;
         this.pojmovi
         .where('kategorija', '==', this.kategorija)
+        .where('pojam', '==', this.pojam)
         .where('pocetnoSlovo', '==', this.pocetnoSlovo)
         .get()
         .then(snapshot => {
-            
-            snapshot.docs.forEach(doc => {
-                if(this.pojam === doc.data().pojam) {
-                    bool = true;
-                }
-            });
-    
-        callback(bool);
+
+            if (snapshot.docs.length == 0) {
+                callback(bool);
+            }
             
         })
         .catch(error => {
             console.log('Error', error);
         });
     }
-    topLista(callback) {
-        this.pojmovi
-        .where('korisnik')
-        .get()
-        .then(snapshot => {
-            
-            snapshot.docs.forEach(doc => {
-                console.log(doc.data().korisnik);
-            });
     
-        callback();
-            
-        })
-        .catch(error => {
-            console.log('Error', error);
-        });
-    }
+
+
 }

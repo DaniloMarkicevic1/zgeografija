@@ -1,3 +1,5 @@
+import { HallOfFame } from "./hallOfFame.js";
+
 let divHide = document.querySelector('#hide');
 //-------------------------------------------------
 if(localStorage.usernameLS == '') {

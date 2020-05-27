@@ -40,6 +40,50 @@
             </form>
         </div>
 
+        <button id="btnHOF">Hall Of Fame</button>
+        <button id="btnHOFClear">Hide Hall of Fame</button>
+        <div id="divHOF">
+            <ul id="ulHOF">
+
+            </ul>
+        </div>
+
+        <form id="formProtivKompjutera">
+            <button id="btnProtivKompjutera">Igraj Protiv Kompjutera</button>
+            <div id="divProtivKompjutera">
+                <!-- class="hidden" -->
+                <div id="naSlovo"></div>
+                <label>Država:</label>
+                <input type="text" name="" id="drzava">
+                <br><br>
+
+                <label>Grad:</label>
+                <input type="text" name="" id="grad">
+                <br><br>
+
+                <label>Reka:</label>
+                <input type="text" name="" id="reka">
+                <br><br>
+
+                <label>Planina:</label>
+                <input type="text" name="" id="planina">
+                <br><br>
+
+                <label>Životinja:</label>
+                <input type="text" name="" id="zivotinja">
+                <br><br>
+
+                <label>Biljka:</label>
+                <input type="text" name="" id="biljka">
+                <br><br>
+
+                <label>Predmet:</label>
+                <input type="text" name="" id="predmet">
+                <br><br>
+
+                <button type="submit">Posalji odgovore</button>
+            </div>
+        </form>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
@@ -65,8 +109,6 @@
     firebase.analytics();
     let db = firebase.firestore();
     </script>
-        
-        <!-- <script src="username.js"></script> -->
         <script src="dodajPojam.js" type="module"></script>
         <script src="script.js" type="module"></script>
     </body>

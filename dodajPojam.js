@@ -1,6 +1,5 @@
 import { Dodajpojam } from "./dodajPojamKlasa.js";
 import { Korisnik } from "./korisnik.js";
-import { sortByFrequencyAndRemoveDuplicates } from "./hallOfFame.js"
 //-------------------------------------------------
 let formPredlog = document.querySelector('#predlog');
 let birajKategoriju = document.querySelector('#birajKategoriju');
@@ -45,34 +44,4 @@ formPredlog.addEventListener('submit', e => {
     formPredlog.reset();
 });
 //-------------------------------------------------
-db.collection('pojmovi')
-.orderBy('korisnik')
-.get()
-.then(snapshot => {
-    let arr = [];
-    let altarr = [];
-    let counter = 0;
-    snapshot.docs.forEach((doc, i) => {
- 
-            arr.push(doc.data().korisnik);
 
-    });
-    console.log(sortByFrequencyAndRemoveDuplicates(arr));
-    for (let i = arr.length; i >= 0 ; i--) {
-        counter++
-        if(arr[i] != arr[i-1]) {
-            if(altarr.length == 5) {
-                break;
-            }
-            else {
-                altarr.push(counter);
-                // name.push([counter,arr[i]]);
-                counter = 0;}
-        }
-    }
-    altarr.sort((a, b) => b - a);
-    console.log(altarr);
-})
-.catch(error => {
-    console.log('Error', error);
-});

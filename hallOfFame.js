@@ -71,7 +71,7 @@ function sortByFrequencyAndRemoveDuplicates(array) {
     
     return uniques.sort(compareFrequency);
     };
-//-------------------------------------------------
+// -------------------------------------------------
 let hofBtn = document.querySelector('#btnHOF');
 let hofBtnClear = document.querySelector('#btnHOFClear');
 

@@ -63,7 +63,7 @@ export class Dodajpojam {
     // Provera pojma
 
     proveriPojam(callback) {
-        let bool = false;
+        let bool = true;
         this.pojmovi
         .where('kategorija', '==', this.kategorija)
         .where('pojam', '==', this.pojam)
@@ -72,15 +72,13 @@ export class Dodajpojam {
         .then(snapshot => {
 
             if (snapshot.docs.length == 0) {
-                callback(bool);
+                bool = false;
             }
-            
+            callback(bool);
+
         })
         .catch(error => {
             console.log('Error', error);
         });
     }
-    
-
-
 }

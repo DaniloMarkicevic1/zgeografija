@@ -17,7 +17,6 @@ formUsername.addEventListener('submit', () => {
 
 })
 //-------------------------------------------------
-console.log()
 formPredlog.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -28,10 +27,13 @@ formPredlog.addEventListener('submit', e => {
     let noviPojam = new Dodajpojam(k, ko, p, ps);
 
     if(localStorage.usernameLS == '') {
+
         alert('Niste uneli korisnicko ime')
+        
     }
     else {
         noviPojam.proveriPojam(bool => {
+
             if(bool) {
                 alert('Pojam postoji');
             }
@@ -39,6 +41,7 @@ formPredlog.addEventListener('submit', e => {
                 noviPojam.dodajPojam();
                 console.log('Pojam dodat uspesno')
             }
+
         });
     }
     formPredlog.reset();
